@@ -2,16 +2,20 @@ import EntryCard from "@/components/EntryCard";
 import NewEntryCard from "@/components/NewEntryCard";
 import { getUserUserByClerkId } from "@/utils/auth"
 import { prisma } from "@/utils/db"
+import Link from "next/link";
 
 const getEntries = async () => {
     const user = await getUserUserByClerkId();
     
     const entries = await prisma.journalEntry.findMany({
         where: {
-            userId: user?.id
+            userId: user.id
         },
         orderBy: {
             createdAt: "desc"
+        },
+        include: {
+            analysis: true
         }
     })
 
@@ -28,7 +32,9 @@ export default async function JournalPage() {
                 <NewEntryCard />
                 {entries.map((el) => {
                     return (
-                        <EntryCard key={el.id} entry={el}/>
+                        <Link key={el.id} href={`/journal/${el.id}`}>
+                            <EntryCard  entry={el}/>
+                        </Link>
                     )
                 })}
             </div>
