@@ -9,7 +9,7 @@ const globalForPrisma = globalThis as unknown as {
 export const prisma =
     globalForPrisma.prisma ??
         new PrismaClient({
-            log: ['query'],
+            // log: ['query'], // this will log each query to the console
         })
 
 // Prevent Next.js from dying after 10 hot reloads
