@@ -51,12 +51,13 @@ model Analysis {
   updatedAt DateTime @updatedAt
 
   entryId String
-  entry   JournalEntry @relation(fields: [entryId], references: [id])
+  entry   JournalEntry @relation(fields: [entryId], references: [id], onDelete: Cascade) // Whenever entry gets deleted delete analysis as well
 
   mood       String
   summary    String  @db.Text
   color      String
   isNegative Boolean
+  subject    String
 
   @@unique([entryId])
 }

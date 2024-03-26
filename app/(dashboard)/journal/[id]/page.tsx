@@ -10,6 +10,9 @@ const getEntry = async (id: string) => {
                 userId: user.id,
                 id
             }
+        },
+        include: {
+            analysis: true
         }
     })
 
@@ -23,7 +26,7 @@ type EntryPageProps = {
 }
 export default async function EntryPage({ params }: EntryPageProps) {
     const entry = await getEntry(params.id);
-
+   
     return (
         <div className="w-full h-full">
             <Editor entry={entry}/>

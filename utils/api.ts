@@ -30,3 +30,7 @@ export const updateEntry = async (id: string, content: string) => {
         return data;
     }
 }
+
+export const qa = async () => {
+    
+}
